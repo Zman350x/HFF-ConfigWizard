@@ -8,6 +8,9 @@ namespace cwiz {
     [BepInPlugin("com.kirisoup.hff.cwiz", PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     [BepInProcess("Human.exe")]
     [BepInDependency("com.plcc.hff.timer", BDF.SoftDependency)]
+    [BepInDependency("com.plcc.hff.humanmod", BDF.SoftDependency)]
+    [BepInDependency("org.bepinex.plugins.humanfallflat.achievements", BDF.SoftDependency)]
+    [BepInDependency("org.bepinex.plugins.humanfallflat.objectgrabber", BDF.SoftDependency)]
     public partial class Plugin : BaseUnityPlugin {
 
         public static readonly string Dir = Path.Combine(Paths.ConfigPath, "ConfigWizard");
