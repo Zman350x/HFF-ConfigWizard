@@ -4,7 +4,7 @@
     <TargetFramework>net48</TargetFramework>
     <AssemblyName>ConfigWizard</AssemblyName>
     <Description>example plugin</Description>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
