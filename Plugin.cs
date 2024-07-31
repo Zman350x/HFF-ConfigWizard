@@ -10,7 +10,7 @@ namespace cwiz {
     [BepInDependency("com.plcc.hff.timer", BDF.SoftDependency)]
     public partial class Plugin : BaseUnityPlugin {
 
-        public static readonly string Dir = Path.Combine(Paths.ConfigPath, "Config Wizard");
+        public static readonly string Dir = Path.Combine(Paths.ConfigPath, "ConfigWizard");
 
         public static readonly string[] GUIDs = new[] {
             "com.plcc.hff.timer",
