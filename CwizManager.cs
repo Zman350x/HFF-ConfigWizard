@@ -24,7 +24,7 @@ namespace cwiz {
             .ToDictionary(tup => tup.guid, tup => tup.Item2)
         );
 
-        private readonly string _path = Path.Combine(Plugin.Dir, Chainloader.PluginInfos[guid].Metadata.Name + ".cfg");
+        private readonly string _path = Path.Combine(Plugin.dir, Chainloader.PluginInfos[guid].Metadata.Name + ".cfg");
 
         private FileSystemWatcher _watcher;
 

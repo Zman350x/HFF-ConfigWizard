@@ -23,7 +23,7 @@ namespace cwiz.ext {
             string other,
             string seperator
         ) => (self.IsBlank(), other.IsBlank()) switch {
-            (true, true) => "",
+            (true, true) => null,
             (true, false) => other,
             (false, true) => self,
             (false, false) => self + seperator + other,

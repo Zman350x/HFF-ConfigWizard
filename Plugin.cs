@@ -1,9 +1,8 @@
 ﻿using cwiz.ext;
 using System;
+using System.IO;
 using System.Linq;
 using BepInEx;
-using Multiplayer;
-
 
 namespace cwiz {
 
@@ -20,7 +19,7 @@ namespace cwiz {
 
         public const string PLUGIN_GUID = "com.kirisoup.hff.cwiz";
 
-        public static readonly string Dir = System.IO.Path.Combine(Paths.ConfigPath, "ConfigWizard");
+        public static readonly string dir = Path.Combine(Paths.ConfigPath, "ConfigWizard");
 
         private static readonly ShellRegist.SCommand _cmd = new(
             "cwiz", 
@@ -50,10 +49,10 @@ namespace cwiz {
 
         public void Awake() {
             instance = this;
-            if (!MainConfig.Enabled) return;
-            if (MainConfig.ApplyByCommand) _cmd.Reg();
-            if (MainConfig.ApplyOnAwake) CwizManager.ApplyAll();
-            if (MainConfig.ApplyOnWrite) CwizManager.ApplyOnWrite(true);
+            if (!MasterConfig.enabled) return;
+            if (MasterConfig.applyByCommand) _cmd.Reg();
+            if (MasterConfig.applyOnAwake) CwizManager.ApplyAll();
+            if (MasterConfig.applyOnWrite) CwizManager.ApplyOnWrite(true);
         }
 
         public void OnDestroy() {
