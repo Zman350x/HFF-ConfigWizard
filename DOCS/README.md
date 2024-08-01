@@ -1,7 +1,7 @@
 # HFF Config Wizard 🥝
 
-[[Document (English) *\<current page>*](..\DOCS\README.en.md) |
-[使用文档（中文）](..\DOCS\README.zh.md)]
+[_current page:_ [Document (English)](README.md) |
+[使用文档（中文）](README-zh.md)]
 ------------------------------------------------------------
 
 
