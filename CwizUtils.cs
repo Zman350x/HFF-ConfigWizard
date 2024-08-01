@@ -14,8 +14,11 @@ namespace cwiz {
                 (false, false) => self + '.' + other,
             };
 
-        public static KeyValuePair<ConfigEntryBase, Action<object>>[] RecursiveBind(this ConfigFile configFile, CwizEntry entry, string groupName = null) =>
-            (entry switch {
+        public static KeyValuePair<ConfigEntryBase, Action<object>>[] RecursiveBind(
+            this ConfigFile configFile,
+            CwizEntry entry,
+            string groupName = null
+        ) => (entry switch {
                 CwizEntry.BaseGroup baseGroup => baseGroup.Entries
                     .SelectMany(entry => configFile.RecursiveBind(entry, groupName.JoinWithName((baseGroup as CwizEntry.Group)?.Key))),
                 CwizEntry.Option option => new KeyValuePair<ConfigEntryBase, Action<object>> (
@@ -23,7 +26,6 @@ namespace cwiz {
                     option.Applier
                 ).Singleton(),
                 _ => throw new NotImplementedException("Unimplemented Config Entry type"),
-            })
-            .ToArray();
+            }).ToArray();
     }
 }

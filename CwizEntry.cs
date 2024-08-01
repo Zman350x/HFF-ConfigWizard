@@ -23,14 +23,24 @@ namespace cwiz {
             public ConfigDescription Desc { get; }
             public Action<object> Applier { get; }
 
-            public Option(string key, object defval, string desc, Action<object> applier = null) {
+            public Option(
+                string key,
+                object defval,
+                string desc,
+                Action<object> applier = null
+            ) {
                 Key = key ?? throw new ArgumentException("key cannot be null");
                 DefaultValue = defval ?? throw new ArgumentException("default value cannot be null");
                 Desc = new ConfigDescription(desc ?? "");
                 Applier = applier ?? new(v => { });
             }
 
-            public Option(string key, object defval, ConfigDescription desc, Action<object> applier = null) {
+            public Option(
+                string key,
+                object defval,
+                ConfigDescription desc,
+                Action<object> applier = null
+            ) {
                 Key = key ?? throw new ArgumentException("key cannot be null");
                 DefaultValue = defval ?? throw new ArgumentException("default value cannot be null");
                 Desc = desc ?? new("");

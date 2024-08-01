@@ -7,7 +7,7 @@ using FILE = BepInEx.Configuration.ConfigFile;
 using DEF = BepInEx.Configuration.ConfigDefinition;
 using DES = BepInEx.Configuration.ConfigDescription;
 
-public static class AutoTypedConfigBinder {
+public static class FlexibleConfigTypeBinder {
     private static readonly Lazy<MethodInfo> _binder = new(() =>
         typeof(FILE)
             .GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -23,14 +23,28 @@ public static class AutoTypedConfigBinder {
             )
     );
 
-    public static ConfigEntryBase TBind(this FILE file, DEF def, object val, DES desc = null) =>
-        _binder.Value?
+    public static ConfigEntryBase TBind(
+        this FILE file,
+        DEF def,
+        object val,
+        DES desc = null
+    ) => _binder.Value?
             .MakeGenericMethod(val.GetType())
             .Invoke(file, new[] { def, val, desc }) as ConfigEntryBase;
 
-    public static ConfigEntryBase TBind(this FILE file, string sec, string key, object val, DES desc = null) =>
-        file.TBind(new(sec, key), val, desc);
+    public static ConfigEntryBase TBind(
+        this FILE file,
+        string sec,
+        string key,
+        object val,
+        DES desc = null
+    ) => file.TBind(new(sec, key), val, desc);
 
-    public static ConfigEntryBase TBind(this FILE file, string sec, string key, object val, string desc) =>
-        file.TBind(new(sec, key), val, new(desc, null));
+    public static ConfigEntryBase TBind(
+        this FILE file,
+        string sec,
+        string key,
+        object val,
+        string desc
+    ) => file.TBind(new(sec, key), val, new(desc, null));
 }
