@@ -1,36 +1,36 @@
+using cwiz.ext;
 using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using BepInEx;
 using BepInEx.Bootstrap;
 using BepInEx.Configuration;
 
 namespace cwiz {
 
-    public class CwizManager {
+    public class CwizManager(string guid) {
 
-        public static Dictionary<string, CwizManager> Managers;
+        public static readonly string Dir = Path.Combine(Paths.ConfigPath, "ConfigWizard");
 
-        public static void InitAll(string[] guids, string dir) {
-            Managers = guids
-                .Where(Chainloader.PluginInfos.ContainsKey)
-                .Where(CwizEntries.DefaultConfigs.ContainsKey)
-                .Select(guid => new CwizManager(guid, new ConfigFile(Path.Combine(dir, Chainloader.PluginInfos[guid].Metadata.Name + ".cfg"), true)))
-                .Where(man => man._file is not null)
-                .ToDictionary(man => man._guid);
-        }
+        public static readonly string[] GUIDs = new[] {
+            "com.plcc.hff.timer",
+            "com.plcc.hff.humanmod",
+            "org.bepinex.plugins.humanfallflat.achievements",
+            "org.bepinex.plugins.humanfallflat.objectgrabber"
+        };
 
-        public CwizManager(string guid, ConfigFile file) {
-            _guid = guid;
-            _file = file;
-            Entries = _file.RecursiveBind(CwizEntries.DefaultConfigs[_guid]).ToDictionary(t => t.Key, t => t.Value);
-        }
+        public static Lazy<Dictionary<string, CwizManager>> Managers = new(() => GUIDs
+            .Where(Chainloader.PluginInfos.ContainsKey)
+            .Where(CwizEntries.DefaultConfigs.ContainsKey)
+            .Select(guid => (guid, new CwizManager(guid)))
+            .ToDictionary(tup => tup.guid, tup => tup.Item2)
+        );
 
-        private readonly ConfigFile _file;
-
-        private readonly string _guid;
-
-        public Dictionary<ConfigEntryBase, Action<object>> Entries;
+        public Dictionary<ConfigEntryBase, Action<object>> Entries = 
+            new ConfigFile(Path.Combine(Dir, Chainloader.PluginInfos[guid].Metadata.Name + ".cfg"), true)
+                .RecursiveBind(CwizEntries.DefaultConfigs[guid])
+                .ToDictionary(t => t.Key, t => t.Value);
 
         public void ApplyAll() => Entries.ForEach(pair =>
             pair.Value(pair.Key.BoxedValue)

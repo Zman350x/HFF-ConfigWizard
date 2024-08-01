@@ -1,3 +1,4 @@
+using cwiz.ext;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -60,7 +61,7 @@ new CwizEntry.PluginGroup[] {
                     new[] {
                         "Specify the id of the level to retry",
                         " (while playing workshop levels, it will always retry the current level)"
-                    }.Lines(),
+                    }.ToLines(),
                     v => Timer.Speedrun.curLevel = (int)v < 0 ? "" : ((int)v).ToString()
                 ),
                 new CwizEntry.Option("Type", WorkshopItemSource.BuiltIn,
@@ -93,7 +94,7 @@ new CwizEntry.PluginGroup[] {
                 new[] {
                     "Fix multiplayer client-side checkpoint recieve bug",
                     "This should always be on if there's no specific reason for it to be off, especiallly while playing CP% coop"
-                }.Lines(),
+                }.ToLines(),
                 v => Timer.Speedrun.fixCheckpoint = (bool)v
             )
         )

@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿using cwiz.ext;
 using BepInEx;
 
 namespace cwiz {
@@ -13,18 +13,11 @@ namespace cwiz {
     [BepInDependency("org.bepinex.plugins.humanfallflat.objectgrabber", BDF.SoftDependency)]
     public partial class Plugin : BaseUnityPlugin {
 
-        public static readonly string Dir = Path.Combine(Paths.ConfigPath, "ConfigWizard");
-
-        public static readonly string[] GUIDs = new[] {
-            "com.plcc.hff.timer",
-            "com.plcc.hff.humanmod",
-            "org.bepinex.plugins.humanfallflat.achievements",
-            "org.bepinex.plugins.humanfallflat.objectgrabber"
-        };
+        public static Plugin instance;
 
         public void Awake() {
-            CwizManager.InitAll(GUIDs, Dir);
-            CwizManager.Managers.ForEach(pair =>
+            instance = this;
+            CwizManager.Managers.Value.ForEach(pair =>
                 pair.Value.ApplyAll()
             );
         }
