@@ -8,7 +8,7 @@ using FILE = BepInEx.Configuration.ConfigFile;
 using DEF = BepInEx.Configuration.ConfigDefinition;
 using DES = BepInEx.Configuration.ConfigDescription;
 
-public static class FlexibleConfigTypeBinder {
+public static class CwizBinder {
     private static readonly Lazy<MethodInfo> _binder = new(() =>
         typeof(FILE)
             .GetMethods(BindingFlags.Public | BindingFlags.Instance)
