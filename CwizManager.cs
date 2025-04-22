@@ -14,7 +14,7 @@ namespace cwiz {
             "com.plcc.hff.timer",
             "com.plcc.hff.humanmod",
             "org.bepinex.plugins.humanfallflat.achievements",
-            "org.bepinex.plugins.humanfallflat.objectgrabber"
+            "top.zman350x.hff.objectgrabber"
         };
 
         public static Lazy<Dictionary<string, CwizManager>> Managers { get; } = new(() => GUIDs

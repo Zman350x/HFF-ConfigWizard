@@ -290,7 +290,7 @@ namespace cwiz {
                             )
                     )
                 ),
-                new("org.bepinex.plugins.humanfallflat.objectgrabber",
+                new("top.zman350x.hff.objectgrabber",
                     new CwizEntry.Option("enabled", false,
                         "Whether is ObjectGrabber (for minimum grab category) enabled",
                         v => {
