@@ -14,6 +14,7 @@ namespace cwiz {
     [BepInDependency("com.plcc.hff.timer", BDF.SoftDependency)]
     [BepInDependency("com.plcc.hff.humanmod", BDF.SoftDependency)]
     [BepInDependency("org.bepinex.plugins.humanfallflat.achievements", BDF.SoftDependency)]
+    [BepInDependency("org.bepinex.plugins.humanfallflat.objectgrabber", BDF.SoftDependency)] //DEPRECATED: Old GUID, left for legacy compatibility
     [BepInDependency("top.zman350x.hff.objectgrabber", BDF.SoftDependency)]
     public partial class Plugin : BaseUnityPlugin {
 

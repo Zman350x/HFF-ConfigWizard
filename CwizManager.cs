@@ -14,6 +14,7 @@ namespace cwiz {
             "com.plcc.hff.timer",
             "com.plcc.hff.humanmod",
             "org.bepinex.plugins.humanfallflat.achievements",
+            "org.bepinex.plugins.humanfallflat.objectgrabber", //DEPRECATED: Old GUID, left for legacy compatibility
             "top.zman350x.hff.objectgrabber"
         };
 

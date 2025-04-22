@@ -304,6 +304,23 @@ namespace cwiz {
                                 .GetValue(ObjectGrabber.GrabberTracker.instance)).text = "Grabs: 0";
                         }
                     )
+                ),
+                //DEPRECATED: Old GUID, left for legacy compatibility
+                //Copy of entry above
+                new("org.bepinex.plugins.humanfallflat.objectgrabber",
+                    new CwizEntry.Option("enabled", false,
+                        "Whether is ObjectGrabber (for minimum grab category) enabled",
+                        v => {
+                            ObjectGrabber.GrabberTracker.instance.isEnabled = (bool)v;
+                            ((UnityEngine.GameObject)HarmonyLib.AccessTools.Field(typeof(ObjectGrabber.GrabberTracker), "textObj")
+                                .GetValue(ObjectGrabber.GrabberTracker.instance))
+                                .SetActive((bool)v);
+                            HarmonyLib.AccessTools.Field(typeof(ObjectGrabber.GrabberTracker), "grabs")
+                            .SetValue(ObjectGrabber.GrabberTracker.instance, 0U);
+                            ((TMPro.TextMeshProUGUI)HarmonyLib.AccessTools.Field(typeof(ObjectGrabber.GrabberTracker), "textVisuals")
+                                .GetValue(ObjectGrabber.GrabberTracker.instance)).text = "Grabs: 0";
+                        }
+                    )
                 )
             }.ToDictionary(p => p.Key, p => p.Entries);
     }
